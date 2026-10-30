@@ -1,0 +1,225 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Income statement",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/income-statement": {
+      "get": {
+        "summary": "Get Income Statement",
+        "operationId": "get_income_statement_income_statement_get",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "description": "First day of the period, included",
+              "title": "Start"
+            },
+            "description": "First day of the period, included"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "description": "Last day of the period, included",
+              "title": "End"
+            },
+            "description": "Last day of the period, included"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncomeStatementOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IncomeStatementOut": {
+        "properties": {
+          "company": {
+            "type": "string",
+            "title": "Company"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "start": {
+            "type": "string",
+            "format": "date",
+            "title": "Start"
+          },
+          "end": {
+            "type": "string",
+            "format": "date",
+            "title": "End"
+          },
+          "revenue": {
+            "$ref": "#/components/schemas/StatementSectionOut"
+          },
+          "cost_of_goods_sold": {
+            "$ref": "#/components/schemas/StatementSectionOut"
+          },
+          "gross_profit": {
+            "type": "string",
+            "title": "Gross Profit"
+          },
+          "operating_expenses": {
+            "$ref": "#/components/schemas/StatementSectionOut"
+          },
+          "operating_income": {
+            "type": "string",
+            "title": "Operating Income"
+          },
+          "other_income": {
+            "$ref": "#/components/schemas/StatementSectionOut"
+          },
+          "net_income": {
+            "type": "string",
+            "title": "Net Income"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company",
+          "currency",
+          "start",
+          "end",
+          "revenue",
+          "cost_of_goods_sold",
+          "gross_profit",
+          "operating_expenses",
+          "operating_income",
+          "other_income",
+          "net_income"
+        ],
+        "title": "IncomeStatementOut"
+      },
+      "StatementLineOut": {
+        "properties": {
+          "account_number": {
+            "type": "string",
+            "title": "Account Number"
+          },
+          "account_name": {
+            "type": "string",
+            "title": "Account Name"
+          },
+          "amount": {
+            "type": "string",
+            "title": "Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "account_number",
+          "account_name",
+          "amount"
+        ],
+        "title": "StatementLineOut"
+      },
+      "StatementSectionOut": {
+        "properties": {
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/StatementLineOut"
+            },
+            "type": "array",
+            "title": "Lines"
+          },
+          "total": {
+            "type": "string",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "lines",
+          "total"
+        ],
+        "title": "StatementSectionOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
