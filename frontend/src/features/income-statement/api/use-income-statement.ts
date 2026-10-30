@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api/client'
 
 export type Period = { start: string; end: string }
@@ -15,5 +15,7 @@ export function useIncomeStatement(period: Period | null) {
       return data
     },
     enabled: period !== null,
+    // Keep the last statement on screen while the next one loads, instead of flashing a skeleton.
+    placeholderData: keepPreviousData,
   })
 }

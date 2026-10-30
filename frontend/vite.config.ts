@@ -10,7 +10,7 @@ export default defineConfig({
     alias: { '@': path.resolve(import.meta.dirname, './src') },
   },
   server: {
-    proxy: { '/income-statement': 'http://localhost:8000' },
+    proxy: { '/income-statement': 'http://localhost:8100' },
   },
   test: {
     environment: 'jsdom',

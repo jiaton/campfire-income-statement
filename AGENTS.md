@@ -9,11 +9,11 @@ The frontend picks the dates and renders the statement. No database, no auth.
 ## Setup / Test / Run
 
 - Backend install: `cd backend && uv sync`
-- Backend run: `cd backend && uv run uvicorn app.main:app --reload` (port 8000)
+- Backend run: `cd backend && uv run uvicorn app.main:app --reload --port 8100`
 - Backend tests: `cd backend && uv run pytest`
 - Frontend install: `cd frontend && npm install`
-- Frontend run: `cd frontend && npm run dev` (port 5173, proxies `/income-statement` to 8000)
-- Frontend gate: `cd frontend && npm run check` (tsc + eslint + vitest)
+- Frontend run: `cd frontend && npm run dev` (port 5173, proxies `/income-statement` to 8100)
+- Frontend gate: `cd frontend && npm run check` (tsc + oxlint + vitest)
 - Regenerate the API types after changing a response model: `cd frontend && npm run gen:api`
 
 ## Stack

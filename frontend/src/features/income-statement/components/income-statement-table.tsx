@@ -86,7 +86,7 @@ export function IncomeStatementTable({ statement }: { statement: IncomeStatement
           ) : (
             <TableRow
               key={row.label}
-              className={row.final ? 'border-t-2 border-b-4 border-double font-bold' : 'font-semibold'}
+              className={row.final ? 'border-t-2! border-b-4! border-double font-bold' : 'font-semibold'}
             >
               <TableCell>{row.label}</TableCell>
               <Amount value={row.amount} />
